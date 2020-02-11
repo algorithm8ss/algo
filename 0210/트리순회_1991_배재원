@@ -1,0 +1,66 @@
+package com.ssafy;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class 트리순회_1991_배재원 {
+	static class Node {
+		int left = -19;
+		int right = -19;
+
+		public Node(int left, int right) {
+			// TODO Auto-generated constructor stub
+			this.left = left;
+			this.right = right;
+		}
+	}
+
+	static Node[] arr;
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		// TODO Auto-generated method stub
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(in.readLine());
+		arr = new Node[N];
+		for (int i = 0; i < N; i++) {
+			StringTokenizer st = new StringTokenizer(in.readLine(), " ");
+			int cur = (int) (st.nextToken().charAt(0) - 'A');
+			arr[cur] = new Node((int) (st.nextToken().charAt(0) - 'A'), (int) (st.nextToken().charAt(0) - 'A'));
+		}
+
+		pre(0);
+		System.out.println();
+		in(0);
+		System.out.println();
+		post(0);
+		System.out.println();
+	}
+
+	public static void pre(int idx) {
+		if (idx == -19)
+			return;
+		System.out.print((char) (idx + 'A'));
+		pre(arr[idx].left);
+		pre(arr[idx].right);
+	}
+
+	public static void in(int idx) {
+		if (idx == -19)
+			return;
+
+		in(arr[idx].left);
+		System.out.print((char) (idx + 'A'));
+		in(arr[idx].right);
+	}
+
+	public static void post(int idx) {
+		if (idx == -19)
+			return;
+
+		post(arr[idx].left);
+		post(arr[idx].right);
+		System.out.print((char) (idx + 'A'));
+	}
+}
